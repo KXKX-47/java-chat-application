@@ -1,15 +1,29 @@
-# Java compiled files
+# Java
 *.class
-
-# VS Code
-.vscode/
 
 # IntelliJ
 .idea/
 
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Maven
+target/
+
+# Gradle
+build/
+
 # Logs
 *.log
 
-# OS files
+# OS Files
 .DS_Store
 Thumbs.db
+
+# Temporary
+tmp/
