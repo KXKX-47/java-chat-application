@@ -27,3 +27,13 @@ Thumbs.db
 
 # Temporary
 tmp/
+
+target/
+
+*.class
+
+.idea/
+
+.vscode/
+
+*.log
