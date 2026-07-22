@@ -27,3 +27,15 @@ Thumbs.db
 
 # Temporary
 tmp/
+
+*.iml
+
+
+# Environment files
+.env
+
+# Certificates
+*.pem
+*.key
+*.p12
+*.jks
