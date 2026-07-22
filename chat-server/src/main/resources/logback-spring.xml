@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true">
+
+    <!-- ==================================================== -->
+    <!-- Application Properties                               -->
+    <!-- ==================================================== -->
+
+    <springProperty 
+        scope="context"
+        name="APP_NAME"
+        source="spring.application.name"/>
+
+    <property
+        name="LOG_HOME"
+        value="/home/kaixun/chat-platform/chat-server/src/main/logs"/>
+
+    <property
+        name="LOG_PATTERN"
+        value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
+
+    <!-- =================================================== -->
+    <!-- Console Appender                                    -->
+    <!-- =================================================== -->
+
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+
+        <encoder>
+
+            <pattern>
+
+                ${LOG_PATTERN}
+
+            </pattern>
+
+        </encoder>
+
+    </appender>
+
+    <!-- =================================================== -->
+    <!-- Application Log                                     -->
+    <!-- =================================================== -->
+
+    <appender
+        name="APPLICATION"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_HOME}/application.log</file>
+
+        <encoder>
+
+            <pattern>
+
+                ${LOG_PATTERN}
+
+            </pattern>
+
+        </encoder>
+
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <fileNamePattern>
+
+                ${LOG_HOME}/application.%d{yyyy-MM-dd}.%i.log.gz
+
+            </fileNamePattern>
+
+            <maxFileSize>20MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+
+        </rollingPolicy>
+
+    </appender>
+
+    <!-- =================================================== -->
+    <!-- Error Log                                           -->
+    <!-- =================================================== -->
+
+    <appender
+        name="ERROR"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_HOME}/error.log</file>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+
+            <level>ERROR</level>
+
+        </filter>
+
+        <encoder>
+
+            <pattern>
+
+                ${LOG_PATTERN}
+
+            </pattern>
+
+        </encoder>
+
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <fileNamePattern>
+
+                ${LOG_HOME}/error.%d{yyyy-MM-dd}.%i.log.gz
+
+            </fileNamePattern>
+
+            <maxFileSize>10MB</maxFileSize>
+
+            <maxHistory>90</maxHistory>
+
+            <totalSizeCap>1GB</totalSizeCap>
+
+        </rollingPolicy>
+
+    </appender>
+
+    <!-- ========================================================= -->
+    <!-- Audit Log                                                 -->
+    <!-- ========================================================= -->
+
+    <appender
+            name="AUDIT"
+            class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${LOG_HOME}/audit.log</file>
+
+        <encoder>
+
+            <pattern>
+
+                %d{yyyy-MM-dd HH:mm:ss} | %msg%n
+
+            </pattern>
+
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <fileNamePattern>
+
+                ${LOG_HOME}/audit.%d{yyyy-MM-dd}.%i.log.gz
+
+            </fileNamePattern>
+
+            <maxFileSize>10MB</maxFileSize>
+
+            <maxHistory>365</maxHistory>
+
+            <totalSizeCap>5GB</totalSizeCap>
+
+        </rollingPolicy>
+
+    </appender>
+
+    <!-- ========================================================= -->
+    <!-- Package Logging                                           -->
+    <!-- ========================================================= -->
+
+    <logger
+            name="com.matlasystems.chat"
+            level="INFO"/>
+
+    <logger
+            name="org.springframework"
+            level="WARN"/>
+
+    <logger
+            name="org.hibernate"
+            level="WARN"/>
+
+    <logger
+            name="org.hibernate.SQL"
+            level="OFF"/>
+
+    <logger
+            name="org.hibernate.orm.jdbc.bind"
+            level="OFF"/>
+
+    <!-- Dedicated Audit Logger -->
+
+    <logger
+            name="AUDIT"
+            level="INFO"
+            additivity="false">
+
+        <appender-ref ref="AUDIT"/>
+
+    </logger>
+
+    <!-- ========================================================= -->
+    <!-- Root Logger                                               -->
+    <!-- ========================================================= -->
+
+    <root level="INFO">
+
+        <appender-ref ref="CONSOLE"/>
+
+        <appender-ref ref="APPLICATION"/>
+
+        <appender-ref ref="ERROR"/>
+
+    </root>
+
+</configuration>

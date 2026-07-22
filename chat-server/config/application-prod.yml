@@ -1,0 +1,82 @@
+spring:
+
+  application:
+    name: chat-server
+
+  profiles:
+    active: prod
+
+  main:
+    banner-mode: off
+
+  datasource:
+
+    driver-class-name: org.postgresql.Driver
+
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+
+    username: ${DB_USERNAME}
+
+    password: ${DB_PASSWORD}
+
+    hikari:
+
+      maximum-pool-size: 30
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+
+  jpa:
+
+    open-in-view: false
+
+    hibernate:
+      ddl-auto: validate
+
+    properties:
+
+      hibernate:
+
+        jdbc:
+          batch_size: 50
+
+        order_updates: true
+        order_inserts: true
+
+        format_sql: false
+
+    show-sql: false
+
+  servlet:
+
+    multipart:
+
+      max-file-size: 20MB
+
+      max-request-size: 20MB
+
+management:
+
+  endpoints:
+
+    web:
+
+      exposure:
+
+        include:
+          - health
+          - info
+          - metrics
+
+server:
+
+  shutdown: graceful
+
+  compression:
+
+    enabled: true
+
+  http2:
+
+    enabled: true

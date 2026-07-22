@@ -1,0 +1,62 @@
+spring:
+
+  application:
+    name: chat-server-test
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chat_test
+    username: test_user
+    password: KtMAT@2026
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+
+    hibernate:
+      ddl-auto: create-drop
+
+    show-sql: false
+
+    properties:
+
+      hibernate:
+
+        format_sql: false
+
+        jdbc:
+          batch_size: 20
+
+    flyway:
+      enabled: false
+
+    liquibase:
+      enabled: false
+
+    sql:
+      init:
+        mode: always
+
+    cache:
+      type: none
+
+    mail:
+      host: localhost
+      port: 1025
+
+logging:
+
+  level:
+
+    root: WARN
+
+    org.springframework: WARN
+
+    com.chatplatform: DEBUG
+
+management:
+
+  endpoints:
+    enabled-by-default: false
+
+server:
+
+  port: 0
